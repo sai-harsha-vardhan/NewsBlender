@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Home</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script>
+                // function preloadFunc(){
+                //     var cookiedata = getCookie("owncookiesecret");
+                //     if (cookiedata == "") {
+                //         window.location.assign("http://localhost:3000/");
+                //     } 
+                // }
+                // window.onpaint = preloadFunc();
+                window.onload = function(){
+                    var a = <%= setc %>;
+                    if(a){
+                        var name = "<%= user.user %>";
+                        var email = "<%= user.email %>";
+                        var ownc = name+":"+email;
+                        setCookie("owncookiesecret", ownc);
+                    }
+                    a=0;
+                    console.log("Cookie Created");
+                }
+                 function setCookie(cname, cvalue) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + ( 60 * 60 * 1000));
+                    var expires = "expires="+d.toUTCString();
+                    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                }
+                function enable(){
+                    document.getElementById("bd").style.backgroundColor = "black";
+                    document.getElementById("bd").style.color = "white";
+                    document.getElementById("btn").style.display = "none";
+                    document.getElementById("btn1").style.display = "block";
+                    var card = document.getElementsByClassName("card");
+                    var hr = document.getElementsByClassName("hr");
+                    var t = document.getElementsByClassName("form-control");
+                    var l = card.length;
+                    for(i=0;i<l;i++){
+                    card[i].style.backgroundColor = "black";
+                    t[i].style.backgroundColor = "black";
+                    t[i].style.color = "white";
+                    hr[i].style.display = "block";
+                    }
+                }
+                function enable1(){
+                    document.getElementById("bd").style.backgroundColor = "black";
+                    document.getElementById("bd").style.color = "white";
+                    document.getElementById("a").style.display = "none";
+                    document.getElementById("a1").style.display = "block";
+                    var t = document.getElementsByClassName("form-control");
+                    var hr = document.getElementsByClassName("hr");
+                    var card = document.getElementsByClassName("card");
+                    var l = card.length;
+                    for(i=0;i<l;i++){
+                    card[i].style.backgroundColor = "black";
+                    hr[i].style.display = "block";
+                    t[i].style.backgroundColor = "black";
+                    t[i].style.color = "white";
+                    }
+                }
+                function disable(){
+                    document.getElementById("bd").style.backgroundColor = "white";
+                    document.getElementById("bd").style.color = "black";
+                    document.getElementById("btn").style.display = "block";
+                    document.getElementById("btn1").style.display = "none";
+                    var t = document.getElementsByClassName("form-control");
+                    var card = document.getElementsByClassName("card");
+                    var hr = document.getElementsByClassName("hr");
+                    var l = card.length;
+                    for(i=0;i<l;i++){
+                    card[i].style.backgroundColor = "white";
+                    hr[i].style.display = "none";
+                    t[i].style.backgroundColor = "white";
+                    t[i].style.color = "black";
+                    }
+                }
+                function disable1(){
+                    document.getElementById("bd").style.backgroundColor = "white";
+                    document.getElementById("bd").style.color = "black";
+                    document.getElementById("a").style.display = "block";
+                    document.getElementById("a1").style.display = "none";
+                    var t = document.getElementsByClassName("form-control");
+                    var card = document.getElementsByClassName("card");
+                    var hr = document.getElementsByClassName("hr");
+                    var l = card.length;
+                    for(i=0;i<l;i++){
+                    card[i].style.backgroundColor = "white";
+                    hr[i].style.display = "none";
+                    t[i].style.backgroundColor = "white";
+                    t[i].style.color = "black";
+                    }
+                }
+                function resized(){
+                    window.location.reload();
+                }
+                function incr(i){
+                    var id = i + "uh";
+                    document.getElementById(id).style.display="none";
+                    var id1 = i + "ch";
+                    document.getElementById(id1).style.display = "inline";
+                    var cd = i+"count";
+                    var count = document.getElementById(cd).textContent;
+                    count++;
+                    document.getElementById(cd).innerHTML =count;
+                    var aid = "author"+i;
+                    var auth = document.getElementById(aid).value;
+                    var title = "title"+i;
+                    var tit = document.getElementById(title).value;
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("get","/increase?count="+count+"&author="+ auth+"&title="+ tit, true);
+                    xmlhttp.onreadystatechange=function(){
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                                string=xmlhttp.responseText;
+                                //console.log(string);
+                            }
+                    }
+                    xmlhttp.send();
+                }
+                function decr(i){
+                    var id1 = i + "ch";
+                    document.getElementById(id1).style.display = "none";
+                    var id = i + "uh";
+                    document.getElementById(id).style.display="inline";
+                    var cd = i+"count";
+                    var count = document.getElementById(cd).textContent;
+                    count--;
+                    document.getElementById(cd).innerHTML =count;
+                    var aid = "author"+i;
+                    var auth = document.getElementById(aid).value;
+                    var title = "title"+i;
+                    var tit = document.getElementById(title).value;
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("get","/decrease?count="+count+"&author="+ auth+"&title="+ tit, true);
+                    xmlhttp.onreadystatechange=function(){
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                                string=xmlhttp.responseText;
+                                //console.log(string);
+                            }
+                    }
+                    xmlhttp.send();
+                }
+                function add(i){
+                    var id = "comment"+i;
+                    var c = document.getElementById(id).value;
+                    var title = "title"+i;
+                    var tit = document.getElementById(title).value;
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("get","/add?comment="+c+"&title="+ tit, true);
+                    xmlhttp.onreadystatechange=function(){
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                                string=xmlhttp.responseText;
+                                string  = Number(string);
+                                var string1 = 100 - string;
+                                let id1 = i + "s";
+                                let id2 = i + "d";
+                                document.getElementById(id1).style.width=string;
+                                document.getElementById(id1).innerHTML =string+"%";
+                                document.getElementById(id2).style.width=string1;
+                                document.getElementById(id2).innerHTML =string1+"%";
+                            }
+                    }
+                    xmlhttp.send();
+                }
+                function goto(x){
+                    switch(x){
+                        case 1:document.getElementById("trending").submit();break;
+                        case 2:document.getElementById("business").submit();break;
+                        case 3:document.getElementById("sports").submit();break;
+                        case 4:document.getElementById("entertainment").submit();break;
+                        case 5:document.getElementById("technology").submit();break;
+                        case 6:document.getElementById("crime").submit();break;
+                        case 7:document.getElementById("national").submit();break;
+                        case 8:document.getElementById("international").submit();break;
+                        case 9:document.getElementById("profileview").submit();break;
+                        
+                    }
+                }
+            </script>
+            <style>
+                nav .navbar-nav li a{
+                    color: white !important;
+                }
+                nav .nav-brand{
+                    border-radius:25px;
+                }
+                nav .navbar-brand{
+                    margin-left: 1%;
+                    font-weight: bolder;
+                }
+                #final{
+                    border-bottom: 2px solid white;
+                    width: 50%;
+                    border-bottom-style: dotted;
+                }
+                body{
+                    padding-top: 65px;
+                    padding-left: 2%;
+                    padding-right:2%;
+                }
+                .media{
+                    padding: 2%;
+                    border-radius: 20px;
+                }
+                hr{
+                    border-color: #cccccc !important;
+                }
+                .navbar {
+                    background-color:#6441A5 ;
+                }
+                #btn{
+                    position: fixed;
+                    right:4%;
+                    bottom:4%;
+                    border:0px;
+                    padding:5px;
+                    background-color: black;
+                    color: white;
+                    border-radius: 40px;
+                }
+                #btn1{
+                    position: fixed;
+                    right:4%;
+                    bottom:4%;
+                    border:0px;
+                    padding:5px;
+                    background-color: white;
+                    color: black;
+                    border-radius: 40px;
+                    display: none;
+                }
+                .hr{
+                    display: none;
+                }
+                #a{
+                    display: none;
+                }
+                #a1{
+                    display: none;
+                }
+                textarea{
+                    background-color: black;
+                }
+                h5{
+                    cursor: pointer;
+                }
+                @media screen and (min-width: 1200px) {
+                    #final{
+                        border-bottom: none;
+                    }
+                    nav .navbar-nav li{
+                        margin-left: 5%;
+                    }
+                    #dm{
+                        display: none;
+                    }
+                    #edit{
+                        display: none;
+                    }
+                    nav .navbar-nav li a:hover{
+                        background-color: #ffffff00;
+                        color:gold !important;
+                    }
+                    .progress{
+                        width:25% !important;
+                    }
+                    #btn{
+                        padding:10px;
+                        bottom:8%;
+                    }
+                    #btn1{
+                        padding:10px;
+                        bottom:8%;
+                    }
+                }
+                
+                ::-webkit-scrollbar {
+                    width: 15px;
+                }
+                ::-webkit-scrollbar-track {
+                    box-shadow: inset 0 0 5px grey; 
+                    border-radius: 10px;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: #d4af37; 
+                    border-radius: 10px;
+                }
+                @media screen and (max-width: 1200px) {
+                    #btn{
+                        display: none;
+                    }
+                    #btn1{
+                        display: none;
+                    }
+                    #a1{
+                        display: none;
+                    }
+                    #a{
+                        display: block;
+                    }
+                    #profile{
+                        display: none;
+                    }
+                }
+            </style>
+        </head>
+        <body id="bd" onresize="resized()">
+            <nav class="navbar navbar-expand-xl navbar-dark fixed-top">
+                <a href="#"><image src="images/logo2.png" id="userimg" class="nav-brand" alt="Brand" style="width:40px"></a>
+                <a class="navbar-brand">News Blender</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item"  >
+                        <a class="nav-link" href="#" onclick="goto(1);"><span id="trending1">Trending</span></a>
+                        <form action="trending" method="POST" id="trending"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goto(2);"><span id="business1">Business</span></a>
+                        <form action="business" method="POST" id="business"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goto(3);"><span id="sports1">Sports</span></a>
+                        <form action="sports" method="POST" id="sports"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goto(4);"><span id="entertainment1">Entertainment</span></a>
+                        <form action="entertainment" method="POST" id="entertainment"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"  onclick="goto(5)"><span id="technology1">Technology</span></a>
+                        <form action="technology" method="POST" id="technology"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"onclick="goto(6);"><span id="crime1">Crime</span></a>
+                        <form action="crime" method="POST" id="crime"></form>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="goto(7);"><span id="national1">National</span></a>
+                        <form action="national" method="POST" id="national"></form>
+                    </li>
+                    <li class="nav-item" id="final">
+                        <a class="nav-link" href="#"  onclick="goto(8);"><span id="international1">International</span></a>
+                        <form action="international" method="POST" id="international"></form>
+                    </li>
+                    <li id="a">
+                        <a class="nav-link" href="#" onclick="enable1()">Dark Mode</a>
+                    </li>
+                    <li id="a1">
+                        <a class="nav-link" href="#" onclick="disable1()">Light Mode</a>
+                    </li>
+                    <li id="profile">
+                        <a class="nav-link" href="#" onclick="goto(9);"><i class="fa fa-user-circle-o" style="font-size:27px" data-toggle="tooltip" title="My Profile"></i></a>
+                        <form action="profileview" method="POST" id="profileview"></form>
+                    </li>
+                    <li id="edit">
+                        <a class="nav-link" href="#" onclick="goto(9);"><i class="fa fa-user-circle-o" style="font-size:27px" data-toggle="tooltip" title="My Profile"></i> My Profile</a>
+                    </li>
+                </ul>  
+                </div>
+             </nav>
+             <% if (sgn == 1) { %>
+                <div class="alert alert-info alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    Signup Successfull.
+              </div>
+            <% } %>
+            <%var i=0; news.forEach(function(news){ %> 
+               <div id="accordion">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="media">
+                        <img src="<%= news.img %>" class="align-self-start mr-3" style="width:60px;height: 70px;">
+                       <div class="media-body">
+                         <h5  data-toggle="collapse" href="#collapse<%= i %>"><%= news.title %> </h5>
+                        <span> Author : <%= news.user %>
+                         <img src="images/heart.png" alt="heart" style="width: 30px;margin-left:20px;" id="<%= i %>uh" onclick="incr(<%= i %>);"><img src="images/heart1.png" alt="heart" style="width: 30px;margin-left:20px;display: none;" id="<%= i %>ch" onclick="decr(<%= i %>);"><span id="<%= i %>count"><%= news.hearts %></span></span>
+                         <br/><br/>
+                           <div class="progress">
+                               <div class="progress-bar bg-success" id="<%= i %>s" style="width:<%= news.ppercent %>%"><%= news.ppercent %>%</div>
+                               <div class="progress-bar bg-danger" id="<%= i %>d" style="width:<%= news.npercent %>%"><%= news.npercent %>%</div>
+                           </div>
+                       </div>
+                   </div>
+                  </div>
+                  <div id="collapse<%= i %>" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                      <%= news.news %><br/>
+                      <br/>
+                    <div class="form-group">
+                        <form id="form<%= i %>">
+                            <label for="comment"><b>Comment:</b></label>
+                            <textarea class="form-control" rows="3" id="comment<%= i %>" name="comment" placeholder="Your Comments are Auto Saved :)" onfocusout="add(<%= i %>)";></textarea>
+                            <input type="text" value="<%= news.user %>" id="author<%= i %>" hidden>
+                            <input type="text" value="<%= news.title %>" id="title<%= i %>" hidden>
+                        </form>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="hr">
+            <% i++;}) %>
+            <button type="button" id="btn" onclick="enable();">DarkMode</button>
+            <button type="button" id="btn1" ondragstart="drag(event)" onclick="disable();">LightMode</button>
+            <script>
+                var c = "<%= user.current %>";
+                document.getElementById(c).style.color = "gold";
+            </script>
+        </body>
+    </html>

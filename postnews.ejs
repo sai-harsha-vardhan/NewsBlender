@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Post</title>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <meta name="google-signin-client_id" content="866621071063-cnfbpd5fm98bs11ekb4qha0mt8nmn2np.apps.googleusercontent.com">
+            <script>
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+            </script>
+            <style>
+                body{
+                    background-color:#6441A5;
+                }
+                #content{
+                    text-align: center;
+                    margin-top: 3%;
+                }
+                #arrow{
+                    color:White;
+                    font-size: 30px;
+                    position: relative;
+                    right: 15%;
+                    cursor: pointer;
+                }
+                ::placeholder{
+                    opacity: 1;
+                    padding:5px;
+                    color: gold;
+                }
+                #sel1{
+                    color: orangered;
+                    border: 1px solid white;
+                    background-color: #6441A5;
+                    color: gold;
+                    padding-left:12px;
+                }
+                select,input{
+                    width:100%;
+                    border-radius: 5px;
+                    border:1px solid white;
+                    height:45px;
+                    margin-top: 15px;
+                    background-color: #6441A5;
+                    padding:5px;
+                    color: white;
+                    padding-left: 12px;
+                }
+                textarea{
+                    width:100%;
+                    border-radius: 5px;
+                    border:1px solid white;
+                    margin-top: 15px;
+                    background-color: #6441A5;
+                    padding:5px;
+                    color:white;
+                    padding-left: 12px;
+                }
+                #head{
+                    color:white;
+                    font-family:georgia;
+                }
+                #sub{
+                    text-align: center;
+                    width:100px;
+                    background-color:#1E90FF ;
+                    color:white;
+                    border-radius:25px;
+                    height:38px;
+                    float:right;
+                    padding: 5px;
+                }
+                #mod{
+                    display:none;
+                }
+            </style>
+            <script>
+                function goback(){
+                    history.back();
+                }
+            </script>
+        </head>
+        <body>
+            <div class="container" id="content">
+                <br/><br/>
+                <h1 id="head"><i class="fa fa-arrow-left" id="arrow" onclick="goback()"></i>Post Article</h1><br/><br/><br/><br/>
+                <form  action="../postdb" method="POST">
+                    <input type="text" placeholder="Title" id="title" name="title" required><br/>
+                    <input type="url" placeholder="Image URL" id="url" name="url" required><br/>
+                    <select class="form-control" id="sel1" name="sel1">
+                        <option disabled>Type of News</option>
+                        <option value="b">Business</option>
+                        <option value="s">Sports</option>
+                        <option value="e">Entertainment</option>
+                        <option value="t">Technology</option>                                                
+                        <option value="c">Crime</option>
+                        <option value="n">National</option>
+                        <option value="i">International</option>
+                      </select>
+                    <input type="hidden" value="" id="user" name="user">
+                    <textarea rows="4"  placeholder="News" id="news" name="news" required></textarea>
+                    <br/>
+                    <br/>
+                    <input type="submit" align="right" id="sub" value="Post Article">
+                </form>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="mod">
+                  </button>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Successfully Posted</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="images/success.png" height="200px" width="150px">
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:history.go(-2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <script>
+                  var a = getCookie("owncookiesecret");
+                    if(a!=""){
+                        a = a.split(":");
+                        document.getElementById("user").value = a[0];
+                        console.log(a[0]);
+                    }
+                    else{
+                        window.location.assign("http://localhost:3000/");
+                    }
+                    var a = <%= p %>;
+                    if(a == 1){
+                        document.getElementById("mod").click(); 
+                    }
+            </script>
+        </body>
+    </html>

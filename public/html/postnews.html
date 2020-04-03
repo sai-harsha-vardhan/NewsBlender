@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Post</title>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <meta name="google-signin-client_id" content="866621071063-cnfbpd5fm98bs11ekb4qha0mt8nmn2np.apps.googleusercontent.com">
+            <style>
+                body{
+                    background-color:#6441A5;
+                }
+                #content{
+                    text-align: center;
+                    margin-top: 3%;
+                }
+                #arrow{
+                    color:White;
+                    font-size: 30px;
+                    position: relative;
+                    right: 15%;
+                    cursor: pointer;
+                }
+                ::placeholder{
+                    opacity: 1;
+                    padding:5px;
+                    color: gold;
+                }
+                #sel1{
+                    color: orangered;
+                    border: 1px solid white;
+                    background-color: #6441A5;
+                    color: gold;
+                }
+                select,input{
+                    width:100%;
+                    border-radius: 5px;
+                    border:1px solid white;
+                    height:45px;
+                    margin-top: 15px;
+                    background-color: #6441A5;
+                    padding:5px;
+                    color: white;
+                    padding-left: 12px;
+                }
+                textarea{
+                    width:100%;
+                    border-radius: 5px;
+                    border:1px solid white;
+                    margin-top: 15px;
+                    background-color: #6441A5;
+                    padding:5px;
+                    color:white;
+                    padding-left: 12px;
+                }
+                #head{
+                    color:white;
+                    font-family:georgia;
+                }
+                #sub{
+                    text-align: center;
+                    width:100px;
+                    background-color:#1E90FF ;
+                    color:white;
+                    border-radius:25px;
+                    height:38px;
+                    float:right;
+                }
+            </style>
+            <script>
+                function goback(){
+                    history.back();
+                }
+            </script>
+        </head>
+        <body>
+            <div class="container" id="content">
+                <br/><br/>
+                <h1 id="head"><i class="fa fa-arrow-left" id="arrow" onclick="goback()"></i>Post Article</h1><br/><br/><br/><br/>
+                <form  action="submit">
+                    <input type="text" placeholder="Title" id="title"><br/>
+                    <input type="text" placeholder="Image URL" id="url"><br/>
+                    <select class="form-control" id="sel1">
+                        <option>Type of News</option>
+                        <option>Business</option>
+                        <option>Sports</option>
+                        <option>Entertainment</option>
+                        <option>Technology</option>                                                
+                        <option>Crime</option>
+                        <option>National</option>
+                        <option>International</option>
+                      </select>
+                    <textarea rows="4"  placeholder="News"></textarea>
+                    <br/>
+                    <br/>
+                    <input type="submit" align="right" id="sub" value="Post Article">
+                </form>
+            </div>
+        </body>
+    </html>

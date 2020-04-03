@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title>MyProfile</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script>
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var ca = document.cookie.split(';');
+                    for(var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+            </script>
+            <style>
+                #name{
+                    font-family: georgia;
+                }
+                #user{
+                    height:20vh;
+                    border-radius:50%;
+                    margin-top: 10vh;
+                    margin-left: -30px;
+                }
+                .container{
+                    text-align: center;
+                    color: white;
+                }
+                .list-group{
+                    color:black;
+                }
+                .menu{
+                    display: flex;
+                    justify-content: center;
+                }
+                body{
+                    background-color:#6441A5 ;
+                }
+                #items{
+                    width:50vw;
+                }
+                .list-group-flush .list-group-item{
+                    background-color: #6441A5;
+                    color: white;
+                    border-color:white;
+                    cursor: pointer;
+                }
+                #arrow{
+                    color:White;
+                    font-size: 30px;
+                    position: relative;
+                    right: 15%;
+                    cursor: pointer;
+                } 
+                a{
+                    color:white;
+                    text-decoration: none;
+                }
+                a:hover{
+                    color:white;
+                    text-decoration: none;
+                }
+            </style>
+            <script>
+                function goback(){
+                    history.back();
+                }
+            </script>
+        </head>
+        <body>
+            <div class="container">
+                <i class="fa fa-arrow-left" id="arrow" onclick="goback()"></i>
+                <img src="images/facef.png" alt="user" id="user">
+                <br/><br/>
+                <h3 id="name">Name</h3>
+                <p id="spin">Loading details <span id="spin"><i class="fa fa-spinner fa-spin"></i></span></p>
+                <br/>
+                    <div class="menu">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">News Published : <span id="articles">0</span></li>
+                            <li class="list-group-item"><span id="hearts">0</span> <i class="fa fa-heart" style="color:red"></i></li>
+                        </ul>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="menu">
+                        <ul class="list-group list-group-flush" id="items">
+                            <li class="list-group-item"><h5 data-toggle="tooltip" title="Coming Soon!"><i class="material-icons">edit</i> Edit Profile</h5></li>
+                            <li class="list-group-item"><a href="postnews" id="anch"><h5><i class="material-icons">add_box</i> Post Article</h5></a></li>
+                            <li class="list-group-item"><h5  data-toggle="tooltip" title="Coming Soon!"><i class="material-icons">flag</i> Help/Contact</h5></li>
+                            <li class="list-group-item" onclick="signOut();"><h5> <i class="material-icons">exit_to_app</i> Log Out</h5></li>
+                            <li class="list-group-item"><h3></h3></li>
+                        </ul>
+                    </div>
+            </div>
+            <form action="logout" method="POST" id="formlog">
+                <input type="numer" id="g" name="g" hidden>
+            </form>
+            <script>
+                    var a = getCookie("owncookiesecret");
+                    if(a!=""){
+                        a = a.split(":");
+                        document.getElementById("name").innerHTML = a[0];
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open("get","/details?email="+a[0], true);
+                        xmlhttp.onreadystatechange=function(){
+                                if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                                    string=xmlhttp.responseText;
+                                    string = string.split("$");
+                                    document.getElementById("hearts").innerHTML = string[1];
+                                    document.getElementById("articles").innerHTML = string[0];
+                                    if(string[2])
+                                    document.getElementById("user").src = string[2];
+                                    document.getElementById("spin").style.display = "none";
+                                }
+                        }
+                        xmlhttp.send();
+                    }
+                    else{
+                        window.location.assign("http://localhost:3000/");
+                    }
+                    function signOut(){
+                        document.cookie = "owncookiesecret=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                        if(localStorage.accessToken){
+                            localStorage.clear();
+                            document.getElementById("g").value = 1;
+                            document.getElementById("formlog").submit();
+                        }
+                        else{
+                            document.getElementById("g").value = 0;
+                            document.getElementById("formlog").submit();
+                        }
+                    }
+            </script>
+        </body>
+    </html>

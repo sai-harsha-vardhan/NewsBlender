@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title>MyProfile</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <style>
+                #user{
+                    height:20vh;
+                    border-radius:50%;
+                    margin-top: 5vh;
+                }
+                .container{
+                    text-align: center;
+                    color: white;
+                }
+                .list-group{
+                    color:black;
+                }
+                .menu{
+                    display: flex;
+                    justify-content: center;
+                }
+                body{
+                    background-color:#6441A5 ;
+                }
+                #items{
+                    width:50vw;
+                }
+                .list-group-flush .list-group-item{
+                    background-color: #6441A5;
+                    color: white;
+                    border-color:white;
+                    cursor: pointer;
+                }
+                #arrow{
+                    color:White;
+                    font-size: 30px;
+                    position: relative;
+                    right: 15%;
+                    cursor: pointer;
+                } 
+                a{
+                    color:white;
+                    text-decoration: none;
+                }
+                a:hover{
+                    color:white;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <i class="fa fa-arrow-left" id="arrow"></i>
+                <img src="facef.png" alt="user" id="user">
+                <br/><br/>
+                <h3>Sai Harsha Vardhan</h3>
+                <br/>
+                    <div class="menu">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">News Published:12</li>
+                            <li class="list-group-item">321<i class="fa fa-heart" style="color:red"></i></li>
+                        </ul>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="menu">
+                        <ul class="list-group list-group-flush" id="items">
+                            <li class="list-group-item"><h5><i class="material-icons">edit</i> Edit Profile</h5></li>
+                            <li class="list-group-item"><a href="postnews.html"><h5><i class="material-icons">add_box</i> Post Article</h5></a></li>
+                            <li class="list-group-item"><h5><i class="material-icons">flag</i> Help/Contact</h5></li>
+                            <li class="list-group-item"><h5> <i class="material-icons">exit_to_app</i> Log Out</h5></li>
+                            <li class="list-group-item"><h3></h3></li>
+                        </ul>
+                    </div>
+            </div>
+        </body>
+    </html>
